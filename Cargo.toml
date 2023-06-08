@@ -2,7 +2,11 @@
 name = "bayer"
 version = "0.2.0"
 edition = "2021"
-authors = ["David Wang <millimillenary@gmail.com>"]
+authors = [
+    "David Wang <millimillenary@gmail.com>",
+    "Moritz Moeller <virtualritz@gmail.com>",
+    "Olivier Le Doeuff <olivier.ldff@gmail.com>",
+]
 homepage = "https://github.com/wangds/libbayer.git"
 repository = "https://github.com/wangds/libbayer.git"
 documentation = "https://docs.rs/bayer/"
