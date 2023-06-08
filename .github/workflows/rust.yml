@@ -1,0 +1,40 @@
+name: Rust
+
+on: push
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    env:
+      SCCACHE_GHA_ENABLED: "true"
+      RUSTC_WRAPPER: "sccache"
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        features: ["", "rayon"]
+    steps:
+    -
+      uses: actions/checkout@v3
+    -
+      name: 🛣️ Run sccache-cache
+      uses: mozilla-actions/sccache-action@2060212363f0ef1fb0bc4ab0376563c11ed0b514
+      with:
+        version: "v0.5.3"
+    -
+      name: 🔧 Install Dependencies
+      if: ${{ contains(matrix.os, 'ubuntu') }}
+      run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libsld2-image-dev
+    -
+      name: 🔨 Build
+      run: cargo build --verbose
+    -
+      name: ✅ Run cargo test
+      run: cargo test --features ${{ matrix.features }} --verbise
+      if: ${{ matrix.features != '' }}
+    -
+      name: ✅ Run cargo test
+      run: cargo test --verbose
+      if: ${{ matrix.features == '' }}
