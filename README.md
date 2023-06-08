@@ -1,5 +1,8 @@
 # `bayer`
 
+> WARNING: This library is a fork of a fork since the original author
+> does not seem to be maintaining it anymore.
+
 [![Version][version-img]][version-url] [![Status][travis-ci-img]][travis-ci-url]
 
 Routines for demosaicing Bayer sensor (RAW) images.
